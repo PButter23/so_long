@@ -11,6 +11,9 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include "external_functions/get_next_line.h"
+
+void	draw_cell(int x, int y, int color, t_data *data);
 
 void	draw_map(int fd, t_data *data)
 {

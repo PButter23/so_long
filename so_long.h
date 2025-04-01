@@ -16,6 +16,8 @@
 # include "mlx/mlx.h"
 # include <stdlib.h>
 # include <fcntl.h>
+# include <stdio.h>
+# include <unistd.h>
 
 typedef struct	s_data
 {

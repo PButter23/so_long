@@ -29,4 +29,5 @@ int	distribute_color(char c)
 		return (0xFFFFFF);
 	else if (c == '1')
 		return (0xFF0000);
+	return (0xFFFFFF);
 }

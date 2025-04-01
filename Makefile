@@ -16,13 +16,17 @@ NAME = program
 # Compilador
 CC = cc
 
+GNL_DIR = external_functions
+
 # Diretório e arquivos fontes
-SRCS = map.c my_mlx_pixel_put.c colors.c get_next_line.c \
-		get_next_line_utils.c get_next_line.h
+SRCS = map.c my_mlx_pixel_put.c colors.c
 OBJS = $(SRCS:.c=.o)
 
+GNL_SRCS = $(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c
+GNL_OBJS = $(GNL_SRCS:.c=.o)
+
 # Flags de compilação
-CFLAGS = -Wall -Wextra -Werror -Iminilibx-linux
+CFLAGS = -Wall -Wextra -Werror -Iminilibx-linux -I$(GNL_DIR)
 
 # Diretório e biblioteca do mlx
 MLX_DIR = ./mlx
@@ -39,8 +43,8 @@ $(MLX):
 # Regra para compilar a biblioteca libft (caso tenha)
 
 # Regra para compilar o programa final
-$(NAME): $(OBJS) $(MLX)
-	@$(CC) $(CFLAGS) $(OBJS) $(MLX_FLAGS) -o $(NAME)
+$(NAME): $(OBJS) $(GNL_OBJS) $(MLX)
+	@$(CC) $(CFLAGS) $(OBJS) $(GNL_OBJS) $(MLX_FLAGS) -o $(NAME)
 
 # Regra para compilar os arquivos .o
 %.o: %.c
@@ -48,7 +52,7 @@ $(NAME): $(OBJS) $(MLX)
 
 # Limpeza dos arquivos objetos
 clean:
-	@rm -f $(OBJS)
+	@rm -f $(OBJS) $(GNL_OBJS)
 	@$(MAKE) clean -C $(MLX_DIR)
 
 # Limpeza total, incluindo o binário
