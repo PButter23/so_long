@@ -19,7 +19,7 @@ CC = cc
 GNL_DIR = external_functions
 
 # Diretório e arquivos fontes
-SRCS = map.c my_mlx_pixel_put.c colors.c
+SRCS = so_long.c original_map.c colors.c key_hook.c dynamic_map.c
 OBJS = $(SRCS:.c=.o)
 
 GNL_SRCS = $(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c

@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arde-jes <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/06 14:33:22 by arde-jes          #+#    #+#             */
-/*   Updated: 2025/03/06 14:33:25 by arde-jes         ###   ########.fr       */
+/*   Created: 2025/03/05 17:03:04 by arde-jes          #+#    #+#             */
+/*   Updated: 2025/03/05 17:03:05 by arde-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	create_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
-}
+#define ESC_KEY 65307
+#define W_KEY 119
+#define A_KEY 97
+#define S_KEY 115
+#define D_KEY 100
 
-int	distribute_color(char c)
+int	key_hook(int keycode, void *param)
 {
-	if (c == 'P')
-		return (0xFF0000);
-	else if (c == 'E')
-		return (0x00FF00);
-	else if (c == 'C')
-		return (0xFFFF00);
-	else if (c == '0')
-		return (0xFFFFFF);
-	else if (c == '1')
-		return (0x808080);
-	return (0xFFFFFF);
+	t_player	*player;
+
+	player = (t_player *)param;
+	if (keycode == ESC_KEY)
+		exit(0);
+	if (keycode == W_KEY)
+		player->y -= 1;
+	if (keycode == A_KEY)
+		player->y += 1;
+	if (keycode == S_KEY)
+		player->x -= 1;
+	if (keycode == D_KEY)
+		player->x += 1;
+	return(0);
 }

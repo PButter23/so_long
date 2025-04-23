@@ -14,10 +14,17 @@
 # define SO_LONG
 
 # include "mlx/mlx.h"
+# include "external_functions/get_next_line.h"
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <unistd.h>
+
+typedef struct	s_player
+{
+	int	x;
+	int	y;
+}				t_player;
 
 typedef struct	s_data
 {
@@ -35,6 +42,8 @@ int		create_trgb(int t, int r, int g, int b);
 void	draw_blue_square(t_data *data);
 int		create_trgb(int t, int r, int g, int b);
 int		distribute_color(char c);
-
+void	original_map(int fd, t_data *data);
+void	draw_cell(int x, int y, int color, t_data *data);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 #endif
