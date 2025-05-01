@@ -26,6 +26,16 @@ typedef struct	s_player
 	int	y;
 }				t_player;
 
+typedef struct	s_game
+{
+	void		*mlx;
+	void		*mlx_win;
+	t_data		img
+	char		**map
+	t_player	player;
+	char		*map_path;
+}				t_game;
+
 typedef struct	s_data
 {
 	void	*img;
@@ -45,5 +55,8 @@ int		distribute_color(char c);
 void	original_map(int fd, t_data *data);
 void	draw_cell(int x, int y, int color, t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	init_game(t_game *game, const char *map_path);
+void	start_loop_game(t_game *game);
+int		key_hook(int keycode, void *param);
 
 #endif
