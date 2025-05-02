@@ -31,6 +31,7 @@ void	init_game(t_game *game, const char *map_path)
 	game->map = original_map(fd, &img);
 	close(fd);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img.img, 0, 0);
+	start_loop_game(game);
 }
 
 void	start_loop_game(t_game *game)

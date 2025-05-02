@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_hook.c                                         :+:      :+:    :+:   */
+/*   render_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arde-jes <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,31 +12,7 @@
 
 #include "so_long.h"
 
-#define ESC_KEY 65307
-#define W_KEY 119
-#define A_KEY 97
-#define S_KEY 115
-#define D_KEY 100
-
-int	key_hook(int keycode, void *param)
+void	render_map(t_game *game, int x, int y)
 {
-	t_game	*game;
-	int		x;
-	int		y;
 
-	x = game->player.x;
-	y = game->player.y;
-	game = (t_game *)param;
-	if (keycode == ESC_KEY)
-		exit(0);
-	else if (keycode == W_KEY)
-		game->player->y -= 1;
-	else if (keycode == A_KEY)
-		game->player->x -= 1;
-	else if (keycode == S_KEY)
-		game->player->y += 1;
-	else if (keycode == D_KEY)
-		game->player->x += 1;
-	movement_condition(game, x, y);
-	return(0);
 }

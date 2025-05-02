@@ -12,4 +12,44 @@
 
 #include "so_long.h"
 
-void	movement_conditions()
+int	check_remaining_collectibles(t_game *game)
+{
+	int	height;
+	int	lenght;
+	int	count_C;
+
+	height = 0;
+	count_C = 0;
+	while (map[height] != NULL)
+	{
+		lenght = 0;
+		while (map[height][lenght] != '\0')
+		{
+			if (map[height][lenght] == 'C')
+				count_C++;
+			lenght++;
+		}
+		height++;
+	}
+	return (count_C);
+}
+
+void	movement_conditions(t_game *game, int x, int y)
+{
+	int	count_C;
+
+	if (game->map[y][x] == '0' || game->map[y][x] == 'C')
+		render_map();
+	else if (game->map[y][x] == 'E')
+	{
+		count_C = check_remaining_collectibles(game);
+		if (count_C == 0)
+			render_map();
+	}
+	else if (game->map[y][x] == '1')
+	{
+		game->player.x = x;
+		game->player.y = y;
+	}
+	return ;
+}
