@@ -14,7 +14,6 @@
 
 void	init_game(t_game *game, const char *map_path)
 {
-	t_data	img;
 	int	fd;
 
 	fd = open(map_path, O_RDONLY);
@@ -28,19 +27,26 @@ void	init_game(t_game *game, const char *map_path)
 	game->img.img = mlx_new_image(game->mlx, 1000, 600);
 	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bits_per_pixel,
 			&game->img.line_length, &game->img.endian);
-	game->map = original_map(fd, &img);
+	game->map = original_map(fd, &game->img);
+	if (!game->map)
+	{
+		dprintf(2, "Erro ao carregar o mapa\n");
+		return ;
+	}
+	find_player_cords(game);
 	close(fd);
+	render_map(game);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img.img, 0, 0);
 	start_loop_game(game);
 }
 
 void	start_loop_game(t_game *game)
 {
-	mlx_key_hook(game->mlx_win, key_hook, &game->player);
+	mlx_key_hook(game->mlx_win, key_hook, game);
 	mlx_loop(game->mlx);
 }
 
-void	find_players_cords(t_game *game)
+void	find_player_cords(t_game *game)
 {
 	int	x;
 	int	y;
@@ -63,18 +69,4 @@ void	find_players_cords(t_game *game)
 	}
 	fprintf(stderr, "player não encontrado\n");
 	return ;
-}
-
-void	draw_map(t_game *game)
-{
-
-}
-
-int	main(void)
-{
-	t_game	game;
-
-	init_game(&game, "maps/hard.ber");
-	start_loop_game(&game);
-	return (0);
 }

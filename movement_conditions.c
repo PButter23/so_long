@@ -20,12 +20,12 @@ int	check_remaining_collectibles(t_game *game)
 
 	height = 0;
 	count_C = 0;
-	while (map[height] != NULL)
+	while (game->map[height] != NULL)
 	{
 		lenght = 0;
-		while (map[height][lenght] != '\0')
+		while (game->map[height][lenght] != '\0')
 		{
-			if (map[height][lenght] == 'C')
+			if (game->map[height][lenght] == 'C')
 				count_C++;
 			lenght++;
 		}
@@ -37,14 +37,26 @@ int	check_remaining_collectibles(t_game *game)
 void	movement_conditions(t_game *game, int x, int y)
 {
 	int	count_C;
+	int	height;
+	int	width;
 
+	height = 0;
+	width = ft_strlen(game->map[0]);
+	if (x < 0 || y < 0 || y >= height || x >= width)
+		return;
+	while (game->map[height])
+		height++;
 	if (game->map[y][x] == '0' || game->map[y][x] == 'C')
-		render_map();
+	{
+		if (game->map[y][x] == 'C')
+			game->map[y][x] = '0';
+		render_map(game);
+	}
 	else if (game->map[y][x] == 'E')
 	{
 		count_C = check_remaining_collectibles(game);
 		if (count_C == 0)
-			render_map();
+			render_map(game);
 	}
 	else if (game->map[y][x] == '1')
 	{

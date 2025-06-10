@@ -1,36 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_map.c                                       :+:      :+:    :+:   */
+/*   so_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arde-jes <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/05 17:03:04 by arde-jes          #+#    #+#             */
-/*   Updated: 2025/03/05 17:03:05 by arde-jes         ###   ########.fr       */
+/*   Created: 2025/03/05 11:48:44 by arde-jes          #+#    #+#             */
+/*   Updated: 2025/03/05 11:50:11 by arde-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	render_map(t_game *game)
+int	main(void)
 {
-	int	x;
-	int	y;
-	int	color;
+	t_game	game;
 
-	y = 0;
-	while (game->map[y])
-	{
-		x = 0;
-		while (game->map[y][x])
-		{
-			color = distribute_color(game->map[y][x]);
-			draw_cell(x, y, color, &game->img);
-			x++;
-		}
-		y++;
-	}
-	color = distribute_color('P');
-	draw_cell(game->player.x, game->player.y, color, &game->img);
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img.img, 0, 0);
+	init_game(&game, "maps/hard.ber");
+	return (0);
 }
